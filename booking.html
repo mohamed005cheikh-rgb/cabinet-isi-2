@@ -372,7 +372,11 @@
                         Numéro de Téléphone
                     </label>
                     <input type="tel" id="phone" class="form-input" 
-                           value="+222 " required>
+                           value="+222 " required 
+                           placeholder="+222 XX XX XX XX">
+                    <small style="color: var(--text-light); margin-top: 0.5rem; display: block;">
+                        Format: +222 suivi de 8 chiffres (ex: +222 12 34 56 78)
+                    </small>
                 </div>
             </div>
 
@@ -652,31 +656,37 @@
                 updateSummary();
             });
 
-            // Formatage du téléphone
+            // === التعديل: تنسيق رقم الهاتف ليقبل 8 أرقام ===
             const phoneInput = document.getElementById('phone');
             phoneInput.addEventListener('input', function(e) {
                 let value = this.value.replace(/\D/g, '');
                 
-                if (!value.startsWith('222')) {
-                    value = '222' + value;
+                // إزالة الرمز الدولي إذا كان المستخدم يكتبه
+                if (value.startsWith('222')) {
+                    value = value.substring(3);
                 }
                 
-                if (value.length > 3) {
-                    let formatted = '+222 ';
-                    value = value.substring(3);
-                    
-                    if (value.length > 0) {
-                        formatted += value.substring(0, 2);
-                        if (value.length > 2) {
-                            formatted += ' ' + value.substring(2, 4);
-                            if (value.length > 4) {
-                                formatted += ' ' + value.substring(4, 6);
+                // حصر الإدخال على 8 أرقام فقط
+                if (value.length > 8) {
+                    value = value.substring(0, 8);
+                }
+                
+                // تنسيق الرقم
+                let formatted = '+222';
+                if (value.length > 0) {
+                    formatted += ' ' + value.substring(0, 2);
+                    if (value.length > 2) {
+                        formatted += ' ' + value.substring(2, 4);
+                        if (value.length > 4) {
+                            formatted += ' ' + value.substring(4, 6);
+                            if (value.length > 6) {
+                                formatted += ' ' + value.substring(6, 8);
                             }
                         }
                     }
-                    
-                    this.value = formatted;
                 }
+                
+                this.value = formatted;
             });
         }
 
@@ -749,11 +759,14 @@
                 errorMessage = 'Veuillez utiliser une adresse @gmail.com';
             }
 
-            // Vérifier le téléphone
+            // === التعديل: تدقيق رقم الهاتف ليشمل 8 أرقام ===
             const phone = document.getElementById('phone').value;
-            if (phone && (!phone.startsWith('+222') || phone.replace(/\s/g, '').length < 12)) {
+            const phoneDigits = phone.replace(/\D/g, '');
+            
+            // الرقم يجب أن يكون: 222 + 8 أرقام = 11 رقم إجمالاً
+            if (phone && (!phone.startsWith('+222') || phoneDigits.length !== 11)) {
                 isValid = false;
-                errorMessage = 'Numéro de téléphone invalide. Format: +222 XX XX XX XX';
+                errorMessage = 'Numéro de téléphone invalide. Format: +222 suivi de 8 chiffres (ex: +222 12 34 56 78)';
             }
 
             if (!isValid) {
