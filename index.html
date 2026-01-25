@@ -3,278 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabinet Médical ISI - Accueil</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Tableau de Bord - Cabinet ISI</title>
 </head>
 <body>
-    <!-- شريط التنقل العلوي -->
+    <!-- Navigation -->
     <nav class="navbar">
-        <div class="nav-container">
+        <div class="container">
             <div class="logo">
-                <i class="fas fa-hospital-alt"></i>
-                <span>Cabinet <strong>ISI</strong></span>
+                <i class="fas fa-stethoscope"></i>
+                <h1>Cabinet <span>ISI</span></h1>
             </div>
             <div class="nav-links">
-                <a href="index.html" class="active"><i class="fas fa-tachometer-alt"></i> Tableau de Bord</a>
-                <a href="booking.html"><i class="fas fa-calendar-check"></i> Réservation</a>
-                <a href="#"><i class="fas fa-user-md"></i> Médecins</a>
-                <a href="#"><i class="fas fa-cog"></i> Paramètres</a>
+                <a href="#" class="active">Accueil</a>
+                <a href="#specialites">Spécialités</a>
+                <a href="#contact">Contact</a>
+                <a href="booking.html" class="btn-reserve">
+                    <i class="fas fa-calendar-check"></i> Réserver
+                </a>
             </div>
-            <div class="user-info">
-                <i class="fas fa-user-circle"></i>
-                <span>Admin</span>
-            </div>
+            <button class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <!-- Dashboard الرئيسي -->
-    <div class="dashboard-container">
-        <!-- عنوان Dashboard -->
-        <header class="dashboard-header">
-            <h1><i class="fas fa-tachometer-alt"></i> Tableau de Bord</h1>
-            <p class="subtitle">Bienvenue au Cabinet Médical ISI - Gestion complète</p>
-        </header>
-
-        <!-- بطاقات الإحصائيات -->
-        <div class="stats-grid">
-            <div class="stat-card patients">
-                <div class="stat-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="stat-content">
-                    <h3>Patients Aujourd'hui</h3>
-                    <div class="stat-number">24</div>
-                    <div class="stat-change">↑ 12% vs hier</div>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Soins médicaux de qualité</h2>
+                <p>Professionnalisme, compassion et excellence au service de votre santé</p>
+                <a href="booking.html" class="btn-primary">
+                    <i class="fas fa-calendar-plus"></i> Prendre rendez-vous
+                </a>
             </div>
-
-            <div class="stat-card appointments">
-                <div class="stat-icon">
-                    <i class="fas fa-calendar-alt"></i>
-                </div>
-                <div class="stat-content">
-                    <h3>Rendez-vous</h3>
-                    <div class="stat-number">18</div>
-                    <div class="stat-change">3 en attente</div>
-                </div>
-            </div>
-
-            <div class="stat-card revenue">
-                <div class="stat-icon">
-                    <i class="fas fa-euro-sign"></i>
-                </div>
-                <div class="stat-content">
-                    <h3>Revenu Journalier</h3>
-                    <div class="stat-number">1,850 €</div>
-                    <div class="stat-change">↑ 8% vs hier</div>
-                </div>
-            </div>
-
-            <div class="stat-card emergencies">
-                <div class="stat-icon">
-                    <i class="fas fa-ambulance"></i>
-                </div>
-                <div class="stat-content">
-                    <h3>Urgences</h3>
-                    <div class="stat-number">4</div>
-                    <div class="stat-change">2 prioritaires</div>
-                </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cabinet médical">
             </div>
         </div>
+    </section>
 
-        <!-- قسم التخصصات الطبية -->
-        <section class="specialties-section">
-            <div class="section-header">
-                <h2><i class="fas fa-stethoscope"></i> Nos Spécialités</h2>
-                <a href="booking.html" class="view-all">Voir tout →</a>
-            </div>
+    <!-- Specialties Section -->
+    <section id="specialites" class="specialties">
+        <div class="container">
+            <h2 class="section-title">Nos Spécialités Médicales</h2>
+            <p class="section-subtitle">Choisissez la spécialité adaptée à vos besoins</p>
             
             <div class="specialties-grid">
-                <div class="specialty-card">
-                    <div class="specialty-icon" style="background-color: #e3f2fd;">
-                        <i class="fas fa-heartbeat"></i>
+                <!-- Médecine Générale -->
+                <div class="specialty-card" data-specialty="general">
+                    <div class="specialty-icon">
+                        <i class="fas fa-user-md"></i>
                     </div>
-                    <h4>Cardiologie</h4>
-                    <p>3 médecins disponibles</p>
-                    <div class="specialty-status available">● Disponible</div>
+                    <h3>Médecine Générale</h3>
+                    <p>Consultations générales et suivi médical</p>
+                    <div class="specialty-price">3,000 MRO</div>
+                    <a href="booking.html?specialty=general" class="btn-specialty">
+                        <i class="fas fa-calendar-alt"></i> Réserver
+                    </a>
                 </div>
 
-                <div class="specialty-card">
-                    <div class="specialty-icon" style="background-color: #f3e5f5;">
+                <!-- Pédiatrie -->
+                <div class="specialty-card" data-specialty="pediatric">
+                    <div class="specialty-icon">
                         <i class="fas fa-baby"></i>
                     </div>
-                    <h4>Pédiatrie</h4>
-                    <p>2 pédiatres</p>
-                    <div class="specialty-status available">● Disponible</div>
+                    <h3>Pédiatrie</h3>
+                    <p>Soins spécialisés pour enfants</p>
+                    <div class="specialty-price">3,500 MRO</div>
+                    <a href="booking.html?specialty=pediatric" class="btn-specialty">
+                        <i class="fas fa-calendar-alt"></i> Réserver
+                    </a>
                 </div>
 
-                <div class="specialty-card">
-                    <div class="specialty-icon" style="background-color: #e8f5e9;">
+                <!-- Dentisterie -->
+                <div class="specialty-card" data-specialty="dental">
+                    <div class="specialty-icon">
                         <i class="fas fa-tooth"></i>
                     </div>
-                    <h4>Dentisterie</h4>
-                    <p>Rendez-vous rapide</p>
-                    <div class="specialty-status busy">● Occupé</div>
+                    <h3>Dentisterie</h3>
+                    <p>Soins dentaires et consultations</p>
+                    <div class="specialty-price">5,000 MRO</div>
+                    <a href="booking.html?specialty=dental" class="btn-specialty">
+                        <i class="fas fa-calendar-alt"></i> Réserver
+                    </a>
                 </div>
 
-                <div class="specialty-card">
-                    <div class="specialty-icon" style="background-color: #fff3e0;">
+                <!-- Cardiologie -->
+                <div class="specialty-card" data-specialty="cardio">
+                    <div class="specialty-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Cardiologie</h3>
+                    <p>Examens et suivi cardiovasculaire</p>
+                    <div class="specialty-price">8,000 MRO</div>
+                    <a href="booking.html?specialty=cardio" class="btn-specialty">
+                        <i class="fas fa-calendar-alt"></i> Réserver
+                    </a>
+                </div>
+
+                <!-- Ophtalmologie -->
+                <div class="specialty-card" data-specialty="eye">
+                    <div class="specialty-icon">
                         <i class="fas fa-eye"></i>
                     </div>
-                    <h4>Ophtalmologie</h4>
-                    <p>Examens complets</p>
-                    <div class="specialty-status available">● Disponible</div>
+                    <h3>Ophtalmologie</h3>
+                    <p>Examens de la vue et soins oculaires</p>
+                    <div class="specialty-price">6,000 MRO</div>
+                    <a href="booking.html?specialty=eye" class="btn-specialty">
+                        <i class="fas fa-calendar-alt"></i> Réserver
+                    </a>
+                </div>
+
+                <!-- Radiologie -->
+                <div class="specialty-card" data-specialty="radio">
+                    <div class="specialty-icon">
+                        <i class="fas fa-x-ray"></i>
+                    </div>
+                    <h3>Radiologie</h3>
+                    <p>Examens d'imagerie médicale</p>
+                    <div class="specialty-price">10,000 MRO</div>
+                    <a href="booking.html?specialty=radio" class="btn-specialty">
+                        <i class="fas fa-calendar-alt"></i> Réserver
+                    </a>
                 </div>
             </div>
-        </section>
-
-        <!-- قسم Rendez-vous القادمة -->
-        <div class="two-column-layout">
-            <section class="appointments-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-clock"></i> Rendez-vous à venir</h2>
-                    <span class="badge">Aujourd'hui</span>
-                </div>
-                
-                <div class="appointments-list">
-                    <div class="appointment-item">
-                        <div class="appointment-time">
-                            <div class="time">09:30</div>
-                            <div class="duration">30 min</div>
-                        </div>
-                        <div class="appointment-details">
-                            <h4>Ahmed Mohamed</h4>
-                            <p><i class="fas fa-stethoscope"></i> Consultation générale</p>
-                            <div class="doctor">Dr. Sophie Martin</div>
-                        </div>
-                        <div class="appointment-status confirmed">Confirmé</div>
-                    </div>
-
-                    <div class="appointment-item">
-                        <div class="appointment-time">
-                            <div class="time">11:00</div>
-                            <div class="duration">45 min</div>
-                        </div>
-                        <div class="appointment-details">
-                            <h4>Fatimetou Zahra</h4>
-                            <p><i class="fas fa-baby"></i> Vaccination</p>
-                            <div class="doctor">Dr. Pierre Dubois</div>
-                        </div>
-                        <div class="appointment-status confirmed">Confirmé</div>
-                    </div>
-
-                    <div class="appointment-item">
-                        <div class="appointment-time">
-                            <div class="time">14:30</div>
-                            <div class="duration">60 min</div>
-                        </div>
-                        <div class="appointment-details">
-                            <h4>Moussa Diop</h4>
-                            <p><i class="fas fa-tooth"></i> Contrôle dentaire</p>
-                            <div class="doctor">Dr. Claire Petit</div>
-                        </div>
-                        <div class="appointment-status pending">En attente</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- قسم الإشعارات السريعة -->
-            <section class="notifications-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-bell"></i> Notifications</h2>
-                    <span class="badge">3 nouvelles</span>
-                </div>
-                
-                <div class="notifications-list">
-                    <div class="notification-item new">
-                        <div class="notification-icon urgent">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="notification-content">
-                            <h4>Urgence médicale</h4>
-                            <p>Patient en salle d'attente - priorité haute</p>
-                            <span class="notification-time">Il y a 5 min</span>
-                        </div>
-                    </div>
-
-                    <div class="notification-item new">
-                        <div class="notification-icon info">
-                            <i class="fas fa-calendar-plus"></i>
-                        </div>
-                        <div class="notification-content">
-                            <h4>Nouveau rendez-vous</h4>
-                            <p>Fatou Ndiaye - Cardiologie à 16h</p>
-                            <span class="notification-time">Il y a 20 min</span>
-                        </div>
-                    </div>
-
-                    <div class="notification-item">
-                        <div class="notification-icon warning">
-                            <i class="fas fa-pills"></i>
-                        </div>
-                        <div class="notification-content">
-                            <h4>Stock médicaments</h4>
-                            <p>Paracétamol faible stock - commander</p>
-                            <span class="notification-time">Il y a 2h</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Quick Actions -->
-                <div class="quick-actions">
-                    <h3><i class="fas fa-bolt"></i> Actions rapides</h3>
-                    <div class="actions-grid">
-                        <a href="booking.html" class="action-btn">
-                            <i class="fas fa-plus-circle"></i>
-                            <span>Nouveau RDV</span>
-                        </a>
-                        <a href="#" class="action-btn">
-                            <i class="fas fa-file-invoice"></i>
-                            <span>Facturation</span>
-                        </a>
-                        <a href="#" class="action-btn">
-                            <i class="fas fa-user-plus"></i>
-                            <span>Nouveau Patient</span>
-                        </a>
-                        <a href="#" class="action-btn">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Rapports</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
         </div>
-    </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <h2 class="section-title">Comment réserver ?</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-mouse-pointer"></i>
+                    </div>
+                    <h3>Choisissez une spécialité</h3>
+                    <p>Sélectionnez le service médical dont vous avez besoin</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Remplissez le formulaire</h3>
+                    <p>Indiquez vos informations et choisissez un créneau</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Effectuez le paiement</h3>
+                    <p>Payez en ligne via votre méthode préférée</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>Envoyez le reçu sur WhatsApp</h3>
+                    <p>Recevez votre confirmation immédiate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-info">
+                <h2 class="section-title">Contactez-nous</h2>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h3>Téléphone</h3>
+                        <p>+222 30 72 64 75</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <h3>WhatsApp</h3>
+                        <p>+222 30 72 64 75</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h3>Email</h3>
+                        <p>cabinet1isi@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h3>Horaires</h3>
+                        <p>Lun-Ven: 8h-18h</p>
+                        <p>Samedi: 9h-13h</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="dashboard-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4><i class="fas fa-hospital"></i> Cabinet ISI</h4>
-                <p>Soins médicaux de qualité avec professionnalisme et compassion.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-stethoscope"></i>
+                        <h2>Cabinet <span>ISI</span></h2>
+                    </div>
+                    <p>Soins médicaux de qualité avec professionnalisme et compassion.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <a href="#specialites">Spécialités</a>
+                    <a href="#contact">Contact</a>
+                    <a href="booking.html">Réservation</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Développeurs</h3>
+                    <p>AS • MC</p>
+                    <div class="signature">1 + 1 ≠ 2</div>
+                </div>
             </div>
             
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <p><i class="fas fa-phone"></i> +222 30 72 64 75</p>
-                <p><i class="fas fa-envelope"></i> cabinet1isi@gmail.com</p>
-                <p><i class="fas fa-clock"></i> Lun-Ven: 8h-18h</p>
+            <div class="footer-bottom">
+                <p>© 2024 Cabinet Médical ISI. Tous droits réservés.</p>
+                <a href="booking.html" class="booking-link">
+                    <i class="fas fa-calendar-alt"></i> Prendre un rendez-vous
+                </a>
             </div>
-            
-            <div class="footer-section">
-                <h4>Développeurs</h4>
-                <p>AS • MC</p>
-                <div class="signature">1 + 1 ≠ 2</div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>© 2024 Cabinet Médical ISI. Tous droits réservés.</p>
-            <a href="booking.html" class="booking-link">
-                <i class="fas fa-calendar-alt"></i> Prendre un rendez-vous
-            </a>
         </div>
     </footer>
+
+    <script>
+        // Navigation mobile
+        document.querySelector('.menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('show');
+        });
+
+        // Sélection de spécialité depuis l'URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const specialty = urlParams.get('specialty');
+            
+            if (specialty) {
+                localStorage.setItem('selectedSpecialty', specialty);
+            }
+        });
+    </script>
 </body>
 </html>
+

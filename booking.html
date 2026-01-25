@@ -3,333 +3,844 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation - Cabinet ISI</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Réservation - Cabinet Médical ISI</title>
     <style>
-        /* أنماط إضافية خاصة بصفحة الحجز */
-        .specialty-selector {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-            margin: 24px 0;
+        /* أنماط إضافية لصفحة الحجز */
+        .booking-page {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 20px;
         }
         
-        .specialty-option {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-md);
-            padding: 20px 16px;
+        .booking-header {
             text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .booking-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .booking-form {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3rem;
+        }
+        
+        .form-step {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .form-step:last-child {
+            border-bottom: none;
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .specialty-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .specialty-btn {
+            padding: 1.5rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            background: white;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-align: center;
         }
         
-        .specialty-option:hover {
-            border-color: var(--medical-teal);
+        .specialty-btn:hover {
+            border-color: var(--primary);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
         }
         
-        .specialty-option.selected {
-            background: linear-gradient(135deg, #f0fff4, #e6fffa);
-            border-color: var(--medical-teal);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .specialty-icon {
-            font-size: 32px;
-            margin-bottom: 12px;
-            color: var(--medical-navy);
+        .specialty-btn.selected {
+            border-color: var(--primary);
+            background: #e0f2fe;
+            color: var(--primary);
         }
         
         .time-slots {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 12px;
-            margin: 24px 0;
+            gap: 0.75rem;
+            margin-top: 1rem;
         }
         
         .time-slot {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-md);
-            padding: 16px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            background: white;
         }
         
         .time-slot:hover {
-            border-color: var(--medical-teal);
+            border-color: var(--primary);
         }
         
         .time-slot.selected {
-            background: linear-gradient(135deg, var(--medical-navy), var(--medical-teal));
+            background: var(--primary);
             color: white;
-            border-color: transparent;
-            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
         }
         
         .time-slot.disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            background: var(--border-light);
+            background: var(--bg-light);
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .payment-method {
+            padding: 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .payment-method.selected {
+            border-color: var(--primary);
+            background: #e0f2fe;
+        }
+        
+        .payment-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
         }
         
         .summary-card {
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            margin: 32px 0;
-            border: 2px solid var(--border-light);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid var(--border);
         }
         
         .summary-item {
             display: flex;
             justify-content: space-between;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
         }
         
         .summary-item:last-child {
             border-bottom: none;
             font-weight: 700;
-            font-size: 18px;
-            color: var(--medical-navy);
+            font-size: 1.25rem;
+            color: var(--primary);
         }
         
-        .amount {
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: space-between;
+        }
+        
+        .btn-back {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border: 2px solid var(--border);
+        }
+        
+        .btn-back:hover {
+            background: #e5e7eb;
+        }
+        
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .confirmation-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .confirmation-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
             font-weight: 600;
-            color: var(--medical-navy);
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .booking-form {
+                padding: 1.5rem;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .specialty-selection,
+            .time-slots,
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .specialty-selection,
+            .time-slots,
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-header h1 {
+                font-size: 2rem;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- رابط للوصول السريع للمحتوى الرئيسي -->
-    <a href="#main-content" class="skip-to-content">Aller au contenu principal</a>
-    
-    <!-- شريط التنقل العلوي -->
+    <!-- Navigation -->
     <nav class="navbar">
-        <div class="nav-container">
+        <div class="container">
             <div class="logo">
-                <i class="fas fa-hospital"></i>
-                <span>Cabinet <strong>ISI</strong></span>
+                <i class="fas fa-stethoscope"></i>
+                <h1>Cabinet <span>ISI</span></h1>
             </div>
             <div class="nav-links">
-                <a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a href="booking.html" class="active"><i class="fas fa-calendar-plus"></i> Réservation</a>
-                <a href="#contact"><i class="fas fa-phone-alt"></i> Contact</a>
-                <a href="#about"><i class="fas fa-info-circle"></i> À propos</a>
+                <a href="index.html">Accueil</a>
+                <a href="index.html#specialites">Spécialités</a>
+                <a href="index.html#contact">Contact</a>
+                <a href="booking.html" class="btn-reserve active">
+                    <i class="fas fa-calendar-check"></i> Réservation
+                </a>
             </div>
-            <div class="user-info">
-                <i class="fas fa-user-md"></i>
-                <span>Patient</span>
-            </div>
+            <button class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <!-- المحتوى الرئيسي -->
-    <main id="main-content" class="booking-page">
-        <!-- ترويسة الصفحة -->
+    <!-- Booking Page -->
+    <main class="booking-page">
         <header class="booking-header">
             <h1>
-                <i class="fas fa-calendar-check"></i>
+                <i class="fas fa-calendar-alt"></i>
                 <span>Réservez Votre Consultation</span>
             </h1>
-            <p class="subtitle">
-                Prenez rendez-vous en ligne en quelques clics. Notre équipe médicale est à votre disposition pour des soins de qualité.
-            </p>
+            <p>Remplissez le formulaire ci-dessous pour prendre rendez-vous</p>
         </header>
 
-        <!-- خطوات الحجز -->
-        <div class="booking-steps">
-            <div class="step active">
-                <div class="step-icon">1</div>
-                <span class="step-label">Informations</span>
-            </div>
-            <div class="step">
-                <div class="step-icon">2</div>
-                <span class="step-label">Spécialité</span>
-            </div>
-            <div class="step">
-                <div class="step-icon">3</div>
-                <span class="step-label">Horaires</span>
-            </div>
-            <div class="step">
-                <div class="step-icon">4</div>
-                <span class="step-label">Paiement</span>
-            </div>
-        </div>
-
-        <!-- نموذج الحجز -->
-        <div class="booking-form-container">
-            <!-- قسم المعلومات الشخصية -->
-            <section class="form-section">
-                <h2 class="section-title">
-                    <i class="fas fa-user-circle"></i>
-                    <span>Vos Informations Personnelles</span>
-                </h2>
-                
-                <form id="bookingForm">
-                    <div class="form-grid">
-                        <!-- الاسم الكامل -->
-                        <div class="form-group">
-                            <label for="fullName">
-                                <i class="fas fa-user"></i>
-                                Nom Complet
-                            </label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-user"></i>
-                                <input type="text" id="fullName" class="form-input" 
-                                       placeholder="Prénom et Nom" required>
-                            </div>
-                            <small class="form-hint">Veuillez entrer votre nom complet</small>
-                        </div>
-
-                        <!-- البريد الإلكتروني -->
-                        <div class="form-group">
-                            <label for="email">
-                                <i class="fas fa-envelope"></i>
-                                Adresse Email
-                            </label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-envelope"></i>
-                                <input type="email" id="email" class="form-input" 
-                                       placeholder="exemple@gmail.com" required>
-                            </div>
-                            <small class="form-hint">Seules les adresses @gmail.com sont acceptées</small>
-                        </div>
-
-                        <!-- رقم الهاتف -->
-                        <div class="form-group">
-                            <label for="phone">
-                                <i class="fas fa-phone"></i>
-                                Numéro de Téléphone
-                            </label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-phone"></i>
-                                <input type="tel" id="phone" class="form-input" 
-                                       value="+222 " required>
-                            </div>
-                            <small class="form-hint">Format: +222 XX XX XX XX</small>
-                        </div>
-
-                        <!-- تاريخ الميلاد -->
-                        <div class="form-group">
-                            <label for="birthDate">
-                                <i class="fas fa-birthday-cake"></i>
-                                Date de Naissance
-                            </label>
-                            <input type="date" id="birthDate" class="form-input" required>
-                        </div>
-                    </div>
-                </form>
-            </section>
-
-            <!-- قسم التخصص الطبي -->
-            <section class="form-section">
-                <h2 class="section-title">
-                    <i class="fas fa-stethoscope"></i>
-                    <span>Choix de la Spécialité</span>
-                </h2>
-                
-                <div class="specialty-selector">
-                    <div class="specialty-option selected" data-specialty="general">
-                        <div class="specialty-icon">🩺</div>
-                        <div class="specialty-name">Médecine Générale</div>
-                        <div class="specialty-price">3,000 MRO</div>
-                    </div>
-                    
-                    <div class="specialty-option" data-specialty="pediatric">
-                        <div class="specialty-icon">👶</div>
-                        <div class="specialty-name">Pédiatrie</div>
-                        <div class="specialty-price">3,500 MRO</div>
-                    </div>
-                    
-                    <div class="specialty-option" data-specialty="dental">
-                        <div class="specialty-icon">🦷</div>
-                        <div class="specialty-name">Dentisterie</div>
-                        <div class="specialty-price">5,000 MRO</div>
-                    </div>
-                    
-                    <div class="specialty-option" data-specialty="cardio">
-                        <div class="specialty-icon">❤️</div>
-                        <div class="specialty-name">Cardiologie</div>
-                        <div class="specialty-price">8,000 MRO</div>
-                    </div>
-                    
-                    <div class="specialty-option" data-specialty="eye">
-                        <div class="specialty-icon">👁️</div>
-                        <div class="specialty-name">Ophtalmologie</div>
-                        <div class="specialty-price">6,000 MRO</div>
-                    </div>
-                    
-                    <div class="specialty-option" data-specialty="radio">
-                        <div class="specialty-icon">☢️</div>
-                        <div class="specialty-name">Radiologie</div>
-                        <div class="specialty-price">10,000 MRO</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- قسم المواعيد المتاحة -->
-            <section class="form-section">
-                <h2 class="section-title">
-                    <i class="fas fa-clock"></i>
-                    <span>Choisissez Votre Horaire</span>
+        <form id="bookingForm" class="booking-form">
+            <!-- Étape 1: Informations personnelles -->
+            <div class="form-step" id="step1">
+                <h2 class="step-title">
+                    <i class="fas fa-user"></i>
+                    Vos Informations
                 </h2>
                 
                 <div class="form-group">
-                    <label for="appointmentDate">
+                    <label for="fullName" class="form-label">
+                        <i class="fas fa-user-circle"></i>
+                        Nom Complet
+                    </label>
+                    <input type="text" id="fullName" class="form-input" 
+                           placeholder="Votre nom et prénom" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">
+                        <i class="fas fa-envelope"></i>
+                        Adresse Email
+                    </label>
+                    <input type="email" id="email" class="form-input" 
+                           placeholder="exemple@gmail.com" required>
+                    <small style="color: var(--text-light); margin-top: 0.5rem; display: block;">
+                        Seules les adresses @gmail.com sont acceptées
+                    </small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" class="form-label">
+                        <i class="fas fa-phone"></i>
+                        Numéro de Téléphone
+                    </label>
+                    <input type="tel" id="phone" class="form-input" 
+                           value="+222 " required>
+                </div>
+            </div>
+
+            <!-- Étape 2: Choix de spécialité -->
+            <div class="form-step" id="step2">
+                <h2 class="step-title">
+                    <i class="fas fa-stethoscope"></i>
+                    Choix de la Spécialité
+                </h2>
+                
+                <div class="specialty-selection">
+                    <div class="specialty-btn selected" data-price="3000">
+                        <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">🩺</div>
+                        <div style="font-weight: 600;">Médecine Générale</div>
+                        <div style="color: var(--primary); margin-top: 0.5rem;">3,000 MRO</div>
+                    </div>
+                    
+                    <div class="specialty-btn" data-price="3500">
+                        <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">👶</div>
+                        <div style="font-weight: 600;">Pédiatrie</div>
+                        <div style="color: var(--primary); margin-top: 0.5rem;">3,500 MRO</div>
+                    </div>
+                    
+                    <div class="specialty-btn" data-price="5000">
+                        <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">🦷</div>
+                        <div style="font-weight: 600;">Dentisterie</div>
+                        <div style="color: var(--primary); margin-top: 0.5rem;">5,000 MRO</div>
+                    </div>
+                    
+                    <div class="specialty-btn" data-price="8000">
+                        <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">❤️</div>
+                        <div style="font-weight: 600;">Cardiologie</div>
+                        <div style="color: var(--primary); margin-top: 0.5rem;">8,000 MRO</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 3: Date et heure -->
+            <div class="form-step" id="step3">
+                <h2 class="step-title">
+                    <i class="fas fa-clock"></i>
+                    Date et Heure
+                </h2>
+                
+                <div class="form-group">
+                    <label for="appointmentDate" class="form-label">
                         <i class="fas fa-calendar-day"></i>
                         Date souhaitée
                     </label>
                     <input type="date" id="appointmentDate" class="form-input" required>
                 </div>
                 
-                <h3 style="margin: 24px 0 16px; color: var(--medical-navy);">
-                    <i class="fas fa-clock"></i> Créneaux horaires disponibles
-                </h3>
-                
                 <div class="time-slots">
-                    <div class="time-slot selected">09:00 - 09:30</div>
-                    <div class="time-slot">10:00 - 10:30</div>
-                    <div class="time-slot">11:00 - 11:30</div>
-                    <div class="time-slot disabled">12:00 - 12:30</div>
-                    <div class="time-slot">14:00 - 14:30</div>
-                    <div class="time-slot">15:00 - 15:30</div>
-                    <div class="time-slot">16:00 - 16:30</div>
-                    <div class="time-slot disabled">17:00 - 17:30</div>
+                    <div class="time-slot selected">09:00</div>
+                    <div class="time-slot">10:00</div>
+                    <div class="time-slot">11:00</div>
+                    <div class="time-slot disabled">12:00</div>
+                    <div class="time-slot">14:00</div>
+                    <div class="time-slot">15:00</div>
+                    <div class="time-slot">16:00</div>
+                    <div class="time-slot">17:00</div>
                 </div>
-            </section>
+            </div>
 
-            <!-- ===== قسم الدفع في الأسفل ===== -->
-            <section class="payment-section">
-                <h2 class="section-title">
+            <!-- Étape 4: Paiement -->
+            <div class="form-step" id="step4">
+                <h2 class="step-title">
                     <i class="fas fa-credit-card"></i>
-                    <span>Informations de Paiement</span>
+                    Mode de Paiement
                 </h2>
                 
-                <div class="info-card">
-                    <p><i class="fas fa-info-circle"></i> 
-                        <strong>Important :</strong> Le paiement doit être effectué avant la confirmation du rendez-vous.
-                    </p>
-                </div>
-                
-                <h3 style="margin: 32px 0 24px; color: var(--medical-navy);">
-                    <i class="fas fa-wallet"></i> Choisissez Votre Mode de Paiement
-                </h3>
-                
-                <div class="payment-options">
-                    <!-- بطاقة Bankily -->
-                    <div class="payment-card selected" data-payment="bankily">
+                <div class="payment-methods">
+                    <div class="payment-method selected">
                         <div class="payment-icon">
                             <i class="fas fa-mobile-alt"></i>
                         </div>
                         <h3>Bankily</h3>
-                        <p>Paiement mobile rapide et sécurisé</p>
-                        <div class="payment-number">33 33 33 33</div>
-                        <div class="payment-details">
-                            <p><i class="fas fa-check-circle"></i> Transaction instantanée</p>
-                            <p><i class="fas fa
+                        <p>33 33 33 33</p>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <div class="payment-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>Sedad</h3>
+                        <p>44 44 44 44</p>
+                    </div>
+                </div>
+                
+                <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 1rem; border-radius: var(--radius); margin-top: 1.5rem;">
+                    <p style="display: flex; align-items: flex-start; gap: 0.5rem; margin: 0; color: #856404;">
+                        <i class="fas fa-info-circle"></i>
+                        <span><strong>Important :</strong> Après paiement, envoyez le reçu sur WhatsApp pour recevoir votre confirmation.</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Résumé -->
+            <div class="summary-card">
+                <h2 class="step-title">
+                    <i class="fas fa-receipt"></i>
+                    Récapitulatif
+                </h2>
+                
+                <div class="summary-item">
+                    <span>Consultation :</span>
+                    <span id="summarySpecialty">Médecine Générale</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span>Date et heure :</span>
+                    <span id="summaryDateTime">--/--/---- --:--</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span>Frais consultation :</span>
+                    <span id="summaryPrice">3,000 MRO</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span>Frais administratifs :</span>
+                    <span>500 MRO</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span>Total à payer :</span>
+                    <span id="summaryTotal">3,500 MRO</span>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="form-actions">
+                <button type="button" class="btn-primary btn-back" onclick="resetForm()">
+                    <i class="fas fa-redo"></i> Recommencer
+                </button>
+                
+                <button type="button" class="btn-primary" onclick="submitBooking()">
+                    <i class="fas fa-check-circle"></i> Confirmer la Réservation
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Modal de confirmation -->
+    <div id="confirmationModal" class="confirmation-modal">
+        <div class="confirmation-content">
+            <div class="confirmation-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            
+            <h2 style="color: var(--text-dark); margin-bottom: 1rem;">
+                Réservation Enregistrée !
+            </h2>
+            
+            <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6;">
+                Votre rendez-vous a été enregistré avec succès.<br>
+                <strong>Dernière étape :</strong> Envoyez le reçu de paiement sur WhatsApp.
+            </p>
+            
+            <a href="https://wa.me/22230726475?text=Bonjour%2C%20voici%20le%20re%C3%A7u%20de%20paiement%20pour%20ma%20r%C3%A9servation%20%C3%A0%20Cabinet%20ISI" 
+               class="whatsapp-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                Envoyer le reçu sur WhatsApp
+            </a>
+            
+            <button type="button" class="btn-primary btn-back" onclick="closeConfirmation()" 
+                    style="margin-top: 1rem; width: 100%;">
+                <i class="fas fa-times"></i> Fermer
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-stethoscope"></i>
+                        <h2>Cabinet <span>ISI</span></h2>
+                    </div>
+                    <p>Soins médicaux de qualité avec professionnalisme et compassion.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-phone"></i> +222 30 72 64 75</p>
+                    <p><i class="fas fa-envelope"></i> cabinet1isi@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Lun-Ven: 8h-18h</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Développeurs</h3>
+                    <p>AS • MC</p>
+                    <div class="signature">1 + 1 ≠ 2</div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 Cabinet Médical ISI. Tous droits réservés.</p>
+                <a href="index.html" class="booking-link">
+                    <i class="fas fa-home"></i> Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Variables
+        let selectedSpecialty = 'general';
+        let selectedTime = '09:00';
+        let selectedDate = '';
+        let consultationPrice = 3000;
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Définir la date minimale (aujourd'hui)
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('appointmentDate');
+            dateInput.min = today;
+            dateInput.value = today;
+            selectedDate = today;
+
+            // Charger la spécialité depuis localStorage
+            const savedSpecialty = localStorage.getItem('selectedSpecialty');
+            if (savedSpecialty) {
+                selectSpecialty(savedSpecialty);
+                localStorage.removeItem('selectedSpecialty');
+            }
+
+            // Ajouter les écouteurs d'événements
+            setupEventListeners();
+            updateSummary();
+        });
+
+        // Configurer les écouteurs d'événements
+        function setupEventListeners() {
+            // Sélection de spécialité
+            document.querySelectorAll('.specialty-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.specialty-btn').forEach(b => {
+                        b.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    
+                    // Mettre à jour le prix
+                    consultationPrice = parseInt(this.dataset.price);
+                    updateSummary();
+                });
+            });
+
+            // Sélection de l'heure
+            document.querySelectorAll('.time-slot:not(.disabled)').forEach(slot => {
+                slot.addEventListener('click', function() {
+                    document.querySelectorAll('.time-slot').forEach(s => {
+                        s.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedTime = this.textContent;
+                    updateSummary();
+                });
+            });
+
+            // Sélection du mode de paiement
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => {
+                        m.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                });
+            });
+
+            // Changement de date
+            document.getElementById('appointmentDate').addEventListener('change', function() {
+                selectedDate = this.value;
+                updateSummary();
+            });
+
+            // Formatage du téléphone
+            const phoneInput = document.getElementById('phone');
+            phoneInput.addEventListener('input', function(e) {
+                let value = this.value.replace(/\D/g, '');
+                
+                if (!value.startsWith('222')) {
+                    value = '222' + value;
+                }
+                
+                if (value.length > 3) {
+                    let formatted = '+222 ';
+                    value = value.substring(3);
+                    
+                    if (value.length > 0) {
+                        formatted += value.substring(0, 2);
+                        if (value.length > 2) {
+                            formatted += ' ' + value.substring(2, 4);
+                            if (value.length > 4) {
+                                formatted += ' ' + value.substring(4, 6);
+                            }
+                        }
+                    }
+                    
+                    this.value = formatted;
+                }
+            });
+        }
+
+        // Sélectionner une spécialité
+        function selectSpecialty(specialty) {
+            const specialtyBtn = document.querySelector(`.specialty-btn[data-price="${getPriceBySpecialty(specialty)}"]`);
+            if (specialtyBtn) {
+                specialtyBtn.click();
+            }
+        }
+
+        // Obtenir le prix par spécialité
+        function getPriceBySpecialty(specialty) {
+            const prices = {
+                'general': 3000,
+                'pediatric': 3500,
+                'dental': 5000,
+                'cardio': 8000,
+                'eye': 6000,
+                'radio': 10000
+            };
+            return prices[specialty] || 3000;
+        }
+
+        // Mettre à jour le résumé
+        function updateSummary() {
+            // Mettre à jour la spécialité
+            const selectedSpecialtyBtn = document.querySelector('.specialty-btn.selected');
+            if (selectedSpecialtyBtn) {
+                document.getElementById('summarySpecialty').textContent = 
+                    selectedSpecialtyBtn.querySelector('div:nth-child(2)').textContent;
+                document.getElementById('summaryPrice').textContent = 
+                    selectedSpecialtyBtn.querySelector('div:nth-child(3)').textContent;
+            }
+
+            // Mettre à jour la date et l'heure
+            const dateInput = document.getElementById('appointmentDate');
+            if (dateInput && dateInput.value) {
+                const date = new Date(dateInput.value);
+                const formattedDate = date.toLocaleDateString('fr-FR');
+                document.getElementById('summaryDateTime').textContent = 
+                    `${formattedDate} ${selectedTime}`;
+            }
+
+            // Calculer le total
+            const total = consultationPrice + 500;
+            document.getElementById('summaryTotal').textContent = 
+                total.toLocaleString('fr-FR') + ' MRO';
+        }
+
+        // Valider le formulaire
+        function validateForm() {
+            const requiredFields = ['fullName', 'email', 'phone'];
+            let isValid = true;
+            let errorMessage = '';
+
+            // Vérifier les champs requis
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    isValid = false;
+                    errorMessage = 'Veuillez remplir tous les champs obligatoires';
+                }
+            });
+
+            // Vérifier l'email
+            const email = document.getElementById('email').value;
+            if (email && !email.endsWith('@gmail.com')) {
+                isValid = false;
+                errorMessage = 'Veuillez utiliser une adresse @gmail.com';
+            }
+
+            // Vérifier le téléphone
+            const phone = document.getElementById('phone').value;
+            if (phone && (!phone.startsWith('+222') || phone.replace(/\s/g, '').length < 12)) {
+                isValid = false;
+                errorMessage = 'Numéro de téléphone invalide. Format: +222 XX XX XX XX';
+            }
+
+            if (!isValid) {
+                alert(`❌ ${errorMessage}`);
+                return false;
+            }
+
+            return true;
+        }
+
+        // Soumettre la réservation
+        function submitBooking() {
+            if (!validateForm()) {
+                return;
+            }
+
+            // Collecter les données
+            const bookingData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                specialty: document.getElementById('summarySpecialty').textContent,
+                dateTime: document.getElementById('summaryDateTime').textContent,
+                amount: document.getElementById('summaryTotal').textContent
+            };
+
+            // Afficher le modal de confirmation
+            const modal = document.getElementById('confirmationModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // Log des données (simulation d'envoi)
+            console.log('Données de réservation :', bookingData);
+        }
+
+        // Réinitialiser le formulaire
+        function resetForm() {
+            if (confirm('Voulez-vous vraiment réinitialiser le formulaire ?')) {
+                document.getElementById('bookingForm').reset();
+                
+                // Réinitialiser les sélections
+                document.querySelectorAll('.specialty-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                document.querySelector('.specialty-btn[data-price="3000"]').classList.add('selected');
+                
+                document.querySelectorAll('.time-slot').forEach(slot => {
+                    slot.classList.remove('selected');
+                });
+                document.querySelector('.time-slot:not(.disabled)').classList.add('selected');
+                
+                document.querySelectorAll('.payment-method').forEach(method => {
+                    method.classList.remove('selected');
+                });
+                document.querySelector('.payment-method').classList.add('selected');
+                
+                // Réinitialiser le téléphone
+                document.getElementById('phone').value = '+222 ';
+                
+                // Réinitialiser la date
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('appointmentDate').value = today;
+                
+                // Mettre à jour le résumé
+                consultationPrice = 3000;
+                selectedTime = '09:00';
+                selectedDate = today;
+                updateSummary();
+                
+                alert('Formulaire réinitialisé avec succès !');
+            }
+        }
+
+        // Fermer le modal de confirmation
+        function closeConfirmation() {
+            const modal = document.getElementById('confirmationModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Réinitialiser le formulaire
+            setTimeout(resetForm, 300);
+        }
+
+        // Navigation mobile
+        document.querySelector('.menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
