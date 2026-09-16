@@ -17,7 +17,7 @@ Ici, vous pouvez découvrir nos spécialités, consulter les tarifs, et réserve
 Choisissez votre spécialité, la date et l'heure qui vous conviennent, réglez par Bankily ou Sedad, et recevez votre confirmation directement sur WhatsApp. Tout est pensé pour vous faire gagner du temps.
 
 ---
-
+<!-- 
 ## 📸 Un aperçu
 
 <div align="center">
@@ -42,7 +42,7 @@ Choisissez votre spécialité, la date et l'heure qui vous conviennent, réglez 
   <img src="https://github.com/mohamed005cheikh-rgb/cabinet-isi-2/raw/main/images/Sr2.gif" alt="Confirmation et envoi sur WhatsApp" width="100%" />
 </div>
 
----
+----->
 
 ## ✨ Ce que vous trouverez
 
