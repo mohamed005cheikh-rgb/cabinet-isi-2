@@ -1,71 +1,104 @@
+<div align="center">
 
-###Cabinet Médical ISI
+# 🏥 Cabinet Médical ISI
 
-Description
+**Prenez rendez-vous en ligne, simplement.**
 
-Site web complet pour un cabinet médical permettant la prise de rendez-vous en ligne. Le projet comprend deux pages principales :
-
-· Page d'accueil : présentation des spécialités médicales avec tarifs
-· Page de réservation : formulaire complet avec sélection de spécialité, date, heure et mode de paiement
-
-Fonctionnalités
-
-· 🏥 Affichage de 6 spécialités médicales avec prix en MRO
-· 📅 Système de réservation avec sélection de date et heure
-· 💳 Deux modes de paiement : Bankily et Sedad
-· 📱 Envoi du reçu via WhatsApp pour confirmation
-· 📧 Validation d'email (uniquement @gmail.com)
-· 📞 Formatage automatique du numéro de téléphone (+222)
-· 📊 Calcul automatique des frais (consultation + frais administratifs)
-· 📱 Interface responsive (mobile, tablette, desktop)
-
-Technologies Utilisées
-
-· HTML5
-· CSS3 (variables CSS, flexbox, grid)
-· JavaScript vanilla (sans framework)
-· Font Awesome (icônes)
-· localStorage (sauvegarde temporaire)
-
-Structure des Fichiers
-
-```
-cabinet-medical-isi/
-├── index.html          # Page d'accueil
-├── booking.html        # Page de réservation
-├── style.css           # Styles partagés
-└── README.md           # Documentation
-```
-
-Utilisation
-
-1. Ouvrir index.html dans un navigateur
-2. Cliquer sur "Réserver" ou choisir une spécialité
-3. Remplir le formulaire de réservation
-4. Sélectionner la date et l'heure souhaitées
-5. Choisir le mode de paiement
-6. Confirmer et envoyer le reçu via WhatsApp
-
-Tarifs
-
-Spécialité Prix
-Médecine Générale 3,000 MRO
-Pédiatrie 3,500 MRO
-Dentisterie 5,000 MRO
-Cardiologie 8,000 MRO
-Ophtalmologie 6,000 MRO
-Radiologie 10,000 MRO
-
-Contact
-
-· Téléphone/WhatsApp : +222 30 72 64 75
-· Email : mohamed005cheikh@gmail.com
-
-Développeurs
-
-AS • MC
-1 + 1 ≠ 2
+</div>
 
 ---
 
-Souhaitez-vous que je crée un README pour un autre code ?
+## 👋 Bienvenue
+
+Le Cabinet Médical ISI vous accueille désormais en ligne.
+
+Ici, vous pouvez découvrir nos spécialités, consulter les tarifs, et réserver votre rendez-vous en quelques minutes — depuis votre téléphone ou votre ordinateur, sans appeler, sans attendre.
+
+Choisissez votre spécialité, la date et l'heure qui vous conviennent, réglez par Bankily ou Sedad, et recevez votre confirmation directement sur WhatsApp. Tout est pensé pour vous faire gagner du temps.
+
+---
+
+## 📸 Un aperçu
+
+<div align="center">
+  <img src="https://github.com/mohamed005cheikh-rgb/cabinet-isi-2/raw/main/images/Sc1.png" alt="Page d'accueil — spécialités et tarifs" width="100%" />
+</div>
+
+<br />
+
+<div align="center">
+  <img src="https://github.com/mohamed005cheikh-rgb/cabinet-isi-2/raw/main/images/Sc2.png" alt="Formulaire de réservation" width="100%" />
+</div>
+
+<br />
+
+<div align="center">
+  <img src="https://github.com/mohamed005cheikh-rgb/cabinet-isi-2/raw/main/images/Sr1.gif" alt="Choisir une spécialité et un créneau" width="100%" />
+</div>
+
+<br />
+
+<div align="center">
+  <img src="https://github.com/mohamed005cheikh-rgb/cabinet-isi-2/raw/main/images/Sr2.gif" alt="Confirmation et envoi sur WhatsApp" width="100%" />
+</div>
+
+---
+
+## ✨ Ce que vous trouverez
+
+**Six spécialités, des tarifs clairs.**  
+Médecine générale, pédiatrie, dentisterie, cardiologie, ophtalmologie et radiologie — chaque consultation affichée avec son prix, en toute transparence.
+
+**Une réservation en quelques étapes.**  
+Choisissez votre spécialité, votre date, votre heure. Ajoutez vos coordonnées, et le tour est joué.
+
+**Deux moyens de paiement.**  
+Réglez par Bankily ou Sedad — selon ce qui vous arrange.
+
+**Votre reçu sur WhatsApp.**  
+Une fois votre rendez-vous confirmé, vous recevez un récapitulatif complet sur WhatsApp, avec tous les détails de votre consultation.
+
+**Des frais transparents.**  
+Le total s'affiche automatiquement : consultation + frais administratifs. Aucune surprise.
+
+---
+
+## 💰 Tarifs
+
+| Spécialité | Prix |
+|:---|:---:|
+| Médecine Générale | 3 000 MRO |
+| Pédiatrie | 3 500 MRO |
+| Dentisterie | 5 000 MRO |
+| Cardiologie | 8 000 MRO |
+| Ophtalmologie | 6 000 MRO |
+| Radiologie | 10 000 MRO |
+
+---
+
+## 🧭 Comment prendre rendez-vous
+
+1. **Choisissez votre spécialité** parmi les six proposées.
+2. **Sélectionnez la date et l'heure** qui vous conviennent.
+3. **Remplissez vos informations** — nom, email, numéro de téléphone.
+4. **Choisissez votre mode de paiement** — Bankily ou Sedad.
+5. **Confirmez** — vous recevrez votre reçu directement sur WhatsApp.
+
+C'est tout. Votre rendez-vous est pris.
+
+---
+
+<div align="center">
+
+### 📞 Nous contacter
+
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-+222_30_72_64_75-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://wa.me/22230726475)
+[![Email](https://img.shields.io/badge/Email-mohamed005cheikh@gmail.com-d14836?style=flat-square&logo=gmail&logoColor=white)](mailto:mohamed005cheikh@gmail.com)
+
+<br />
+
+*Votre santé mérite toute notre attention.*
+
+<sub>© 2026 Cabinet Médical ISI — MC88</sub>
+
+</div>
